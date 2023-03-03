@@ -8,11 +8,11 @@ TextFormField buildTextFormField(
       required IconData iconData,
       required TextInputType textInputType,
       bool isPassword= false,
-      bool textHidden=true,
-      required TextEditingController textEditingController ,
+      bool isObscure=false,
     }
     ) {
   return TextFormField(
+
     validator: (value){
       if (value==null||value=="")
         {
@@ -23,16 +23,20 @@ TextFormField buildTextFormField(
           return null;
         }
     },
-    controller:textEditingController ,
-    obscureText:  isPassword,
+    obscureText: isPassword ? isObscure : false,
+
     decoration:  InputDecoration(
       fillColor: Colors.amberAccent,
       prefixIcon:Icon( iconData),
       hintText: hintText,
       labelText: labelText,
       suffixIcon:isPassword? IconButton(onPressed: () {
-        textHidden=false;
-        isPassword=textHidden;
+        print("********************************##suffix pressed  \n"
+            "isObsecure : $isObscure \n"
+            "isPassword : $isPassword \n");
+
+        isObscure=!isObscure;
+
       },
           icon:const Icon (Icons.remove_red_eye_outlined)) :null ,
     ),

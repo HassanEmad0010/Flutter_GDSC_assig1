@@ -5,9 +5,16 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import '../comp/my_widgets.dart';
 import 'Login_Screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController textEditingController=TextEditingController();
+
   final _formKey=GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Color constantColor= Colors.purple;
@@ -43,7 +50,6 @@ class RegisterScreen extends StatelessWidget {
                   Container(
                     color: Colors.black12,
                     child: buildTextFormField(
-                      textEditingController: textEditingController,
                       labelText: "Full Name",
                       hintText: "Enter your name",
                       iconData: Icons.person,
@@ -55,7 +61,6 @@ class RegisterScreen extends StatelessWidget {
                   Container(
                     color: Colors.black12,
                     child: buildTextFormField(
-                      textEditingController: textEditingController,
                       labelText: "Phone Number",
                       hintText: "Enter your Phone Number",
                       iconData: Icons.phone,
@@ -71,7 +76,6 @@ class RegisterScreen extends StatelessWidget {
                         Container(
                           color: Colors.black12,
                           child: buildTextFormField(
-                            textEditingController: textEditingController,
                             labelText: "Email",
                             hintText: "Enter your email",
                             iconData: Icons.mail_outline_outlined,
@@ -83,7 +87,6 @@ class RegisterScreen extends StatelessWidget {
                           color: Colors.black12,
                           child:
                           buildTextFormField(
-                            textEditingController: textEditingController,
                             labelText: "Password",
                             hintText: " Enter your password",
                             iconData: Icons.lock_outline,
@@ -97,7 +100,6 @@ class RegisterScreen extends StatelessWidget {
                           color: Colors.black12,
                           child:
                           buildTextFormField(
-                            textEditingController: textEditingController,
                             labelText: "Confirm Password",
                             hintText: " Enter your password again",
                             iconData: Icons.lock_outline,
@@ -116,9 +118,15 @@ class RegisterScreen extends StatelessWidget {
                    onTap: (){
                     if(_formKey.currentState!.validate() ) {
                       print("Register pressed");
+                      setState(() {
+
+                      });
                     }
                     else
                       {
+                        setState(() {
+
+                        });
                         print("value is null");
                       }
 

@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           color: Colors.black12,
                           child: buildTextFormField(
-                            textEditingController: textEditingControllerEmail,
+
                             labelText: "Email",
                             hintText: "Enter your email",
                             iconData: Icons.mail_outline_outlined,
@@ -69,8 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           color: Colors.black12,
                           child:
+
                           buildTextFormField(
-                            textEditingController: textEditingControllerPass,
                             labelText: "Password",
                             hintText: " Enter your password",
                             iconData: Icons.lock_outline,
