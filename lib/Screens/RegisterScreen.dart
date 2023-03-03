@@ -2,7 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
-class MyHomePage extends StatelessWidget {
+import '../comp/my_widgets.dart';
+import 'Login_Screen.dart';
+
+class RegisterScreen extends StatelessWidget {
+  TextEditingController textEditingController=TextEditingController();
+  final _formKey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Color constantColor= Colors.purple;
@@ -38,6 +43,7 @@ class MyHomePage extends StatelessWidget {
                   Container(
                     color: Colors.black12,
                     child: buildTextFormField(
+                      textEditingController: textEditingController,
                       labelText: "Full Name",
                       hintText: "Enter your name",
                       iconData: Icons.person,
@@ -49,6 +55,7 @@ class MyHomePage extends StatelessWidget {
                   Container(
                     color: Colors.black12,
                     child: buildTextFormField(
+                      textEditingController: textEditingController,
                       labelText: "Phone Number",
                       hintText: "Enter your Phone Number",
                       iconData: Icons.phone,
@@ -57,47 +64,65 @@ class MyHomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 13,),
 
-                  Container(
-                    color: Colors.black12,
-                    child: buildTextFormField(
-                      labelText: "Email",
-                      hintText: "Enter your email",
-                      iconData: Icons.mail_outline_outlined,
-                      textInputType: TextInputType.emailAddress,
-                    ),
-                  ),
-                  const SizedBox(height: 13,),
-                  Container(
-                    color: Colors.black12,
-                    child:
-                    buildTextFormField(
-                      labelText: "Password",
-                      hintText: " Enter your password",
-                      iconData: Icons.lock_outline,
-                      textInputType: TextInputType.visiblePassword,
-                      isPassword: true,
-                    ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Container(
+                          color: Colors.black12,
+                          child: buildTextFormField(
+                            textEditingController: textEditingController,
+                            labelText: "Email",
+                            hintText: "Enter your email",
+                            iconData: Icons.mail_outline_outlined,
+                            textInputType: TextInputType.emailAddress,
+                          ),
+                        ),
+                        const SizedBox(height: 13,),
+                        Container(
+                          color: Colors.black12,
+                          child:
+                          buildTextFormField(
+                            textEditingController: textEditingController,
+                            labelText: "Password",
+                            hintText: " Enter your password",
+                            iconData: Icons.lock_outline,
+                            textInputType: TextInputType.visiblePassword,
+                            isPassword: true,
+                          ),
 
-                  ),
-                  const SizedBox(height: 13,),
-                  Container(
-                    color: Colors.black12,
-                    child:
-                    buildTextFormField(
-                      labelText: "Confirm Password",
-                      hintText: " Enter your password again",
-                      iconData: Icons.lock_outline,
-                      textInputType: TextInputType.visiblePassword,
-                      isPassword: true,
-                    ),
+                        ),
+                        const SizedBox(height: 13,),
+                        Container(
+                          color: Colors.black12,
+                          child:
+                          buildTextFormField(
+                            textEditingController: textEditingController,
+                            labelText: "Confirm Password",
+                            hintText: " Enter your password again",
+                            iconData: Icons.lock_outline,
+                            textInputType: TextInputType.visiblePassword,
+                            isPassword: true,
+                          ),
 
+                        ),
+                      ],
+                    ),
                   ),
 
                   const SizedBox(height: 10,),
 
                  GestureDetector(
                    onTap: (){
-                     print("Register pressed");
+                    if(_formKey.currentState!.validate() ) {
+                      print("Register pressed");
+                    }
+                    else
+                      {
+                        print("value is null");
+                      }
+
+
                    },
                    child:
                    Container(
@@ -117,7 +142,9 @@ class MyHomePage extends StatelessWidget {
 
                   GestureDetector(
                     onTap: (){
-                      print("sign up pressed");
+                      print("log in pressed");
+                      Navigator.pushNamed(context, "LoginScreen");
+
                     },
                     child:
                     Container(
@@ -140,32 +167,9 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }}
 
-  TextFormField buildTextFormField(
-  {
-    required String hintText,
-    required String labelText,
-    required IconData iconData,
-    required TextInputType textInputType,
-    bool isPassword= false,
-}
-      ) {
-    return TextFormField(
-      obscureText: isPassword,
-                      decoration:  InputDecoration(
-                        fillColor: Colors.amberAccent,
-                        prefixIcon:Icon( iconData),
-                        hintText: hintText,
-                        labelText: labelText,
-                        suffixIcon:isPassword? IconButton(onPressed: () {},
-                            icon:const Icon (Icons.remove_red_eye_outlined)) :null ,
-                      ),
-                      keyboardType: textInputType,
 
-                    );
-  }
-}
 
 class CurveClipper extends CustomClipper<Path> {
   @override

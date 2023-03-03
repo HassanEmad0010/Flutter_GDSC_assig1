@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'Screens/loginScreen.dart';
+import 'Screens/Items.dart';
+import 'Screens/Login_Screen.dart';
+
+import 'Screens/RegisterScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +18,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Assignment',
-      home:  MyHomePage(),
+      home:  LoginScreen(),
+
+      routes: {
+        'LoginScreen': (context) =>  LoginScreen(),
+        'RegisterScreen': (context) =>  RegisterScreen(),
+        'ItemScreen': (context) =>  ItemClass(),
+
+      },
+
     );
   }
 }
