@@ -8,7 +8,7 @@ TextFormField buildTextFormField(
       required IconData iconData,
       required TextInputType textInputType,
       bool isPassword= false,
-      bool isObscure=false,
+      bool isObscure=true,
     }
     ) {
   return TextFormField(
@@ -42,7 +42,8 @@ TextFormField buildTextFormField(
     ),
     keyboardType: textInputType,
 
-  );}
+  );
+}
 
 
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
@@ -10,17 +9,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController textEditingControllerEmail=TextEditingController();
+  TextEditingController textEditingControllerEmail = TextEditingController();
 
-  TextEditingController textEditingControllerPass=TextEditingController();
+  TextEditingController textEditingControllerPass = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  bool isPassword = true;
+  bool isObscure = false;
 
   @override
   Widget build(BuildContext context) {
-    Color constantColor= Colors.purple;
+    Color constantColor = Colors.purple;
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -30,8 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 height: 280,
                 width: double.infinity,
-                color:constantColor,
-                child:const Center(
+                color: constantColor,
+                child: const Center(
                   child: Text(
                     "Login",
                     style: TextStyle(
@@ -42,14 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
-
                   Form(
                     key: _formKey,
                     child: Column(
@@ -57,80 +54,113 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           color: Colors.black12,
                           child: buildTextFormField(
-
                             labelText: "Email",
                             hintText: "Enter your email",
                             iconData: Icons.mail_outline_outlined,
                             textInputType: TextInputType.emailAddress,
                           ),
-
                         ),
-                        const SizedBox(height: 13,),
+                        const SizedBox(
+                          height: 13,
+                        ),
+
                         Container(
                           color: Colors.black12,
-                          child:
-
-                          buildTextFormField(
-                            labelText: "Password",
-                            hintText: " Enter your password",
-                            iconData: Icons.lock_outline,
-                            textInputType: TextInputType.visiblePassword,
-                            isPassword: true,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value == "") {
+                                return " can't be empty";
+                              } else {
+                                return null;
+                              }
+                            },
+                            obscureText: isPassword ? isObscure : false,
+                            decoration: InputDecoration(
+                              fillColor: Colors.amberAccent,
+                              prefixIcon: Icon(Icons.lock_outline,),
+                              hintText: " Enter your password",
+                              labelText: "Password",
+                              suffixIcon: isPassword
+                                  ? IconButton(
+                                      onPressed: () {
+                                        isObscure = !isObscure;
+                                        setState(() {});
+                                        print(
+                                            "********************************##suffix pressed  \n"
+                                            "isObsecure : $isObscure \n"
+                                            "isPassword : $isPassword \n");
+                                      },
+                                      icon: const Icon(
+                                          Icons.remove_red_eye_outlined))
+                                  : null,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-
-                  const SizedBox(height: 10,),
-
+                  const SizedBox(
+                    height: 10,
+                  ),
                   GestureDetector(
-                    onTap: (){
-
-                   if (_formKey.currentState!.validate()) {
-                     print("Log-In pressed");
-                     Navigator.pushNamed(context, "ItemScreen");
-                   }
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        print("Log-In pressed");
+                        Navigator.pushNamed(context, "ItemScreen");
+                      }
                     },
-                    child:
-                    Container(
+                    child: Container(
                       decoration: BoxDecoration(
-                        borderRadius:const BorderRadius.all(Radius.circular(15)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
                         color: constantColor,
                       ),
                       width: double.infinity,
                       height: 50,
-
-                      child: const Center(child: Text("Log-In",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.white),)),
+                      child: const Center(
+                          child: Text(
+                        "Log-In",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Colors.white),
+                      )),
                     ),
                   ),
-
-                  const SizedBox(height: 18,),
-
+                  const SizedBox(
+                    height: 18,
+                  ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       print("Register now pressed");
                       Navigator.pushNamed(context, "RegisterScreen");
                     },
-                    child:
-                    Column(
+                    child: Column(
                       children: [
-                        Text("Don't have an account?",style: TextStyle(fontSize: 16),),
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(fontSize: 16),
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
-
-                            border: Border.all(color: Colors.grey ,width: 2),
+                            border: Border.all(color: Colors.grey, width: 2),
                           ),
                           width: double.infinity,
                           height: 50,
-                          child:  Center(child: Text("Register Now",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: constantColor),)),
+                          child: Center(
+                              child: Text(
+                            "Register Now",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                                color: constantColor),
+                          )),
                         ),
                       ],
                     ),
                   ),
-
                 ],
               ),
             ),
@@ -141,11 +171,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-
 class CurveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-
     var path = Path();
 
     path.lineTo(0.0, size.height - 55);
@@ -156,8 +184,7 @@ class CurveClipper extends CustomClipper<Path> {
 
     var secondCP = Offset(size.width / 1.25, size.height);
     var secondEP = Offset(size.width, size.height - 30);
-    path.quadraticBezierTo(
-        secondCP.dx, secondCP.dy, secondEP.dx, secondEP.dy);
+    path.quadraticBezierTo(secondCP.dx, secondCP.dy, secondEP.dx, secondEP.dy);
 
     path.lineTo(size.width, size.height - 25);
     path.lineTo(size.width, 0.0);
